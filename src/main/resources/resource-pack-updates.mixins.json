@@ -1,0 +1,12 @@
+{
+  "required": true,
+  "package": "org.cbigames.resourceupdate.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "ExampleMixin",
+    "ResourcePackProperties"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+	}
+}
