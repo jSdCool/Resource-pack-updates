@@ -93,6 +93,8 @@ public class Config {
     }
 
     private void save(){
+        //noinspection ResultOfMethodCallIgnored
+        new File("config/").mkdirs();
         try (PrintWriter ouput = new PrintWriter("config/resourcePack.cfg")){
             ouput.println("onLocalComputer="+onLocalComputer);
             ouput.println("location="+location);
