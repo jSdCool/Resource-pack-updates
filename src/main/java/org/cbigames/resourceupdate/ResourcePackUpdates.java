@@ -4,9 +4,9 @@ import net.fabricmc.api.ModInitializer;
 
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
+import net.minecraft.commands.Commands;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.PlayerManager;
-import net.minecraft.server.command.CommandManager;
+import net.minecraft.server.players.PlayerList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,17 +22,17 @@ public class ResourcePackUpdates implements ModInitializer {
 	public static Config globalConfig = new Config();
 
 	static MinecraftServer ms;
-	static PlayerManager pm;
+	static PlayerList pm;
 
 	@Override
 	public void onInitialize() {
 		ServerLifecycleEvents.SERVER_STARTED.register((server) -> {
 			ms=server;
-			pm = ms.getPlayerManager();
+			pm = ms.getPlayerList();
 		});
 
 		CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> {
-			dispatcher.register(CommandManager.literal("reload_server_resource_pack").executes(context -> {
+			dispatcher.register(Commands.literal("reload_server_resource_pack").executes(context -> {
 				globalConfig.calculateHash();
 				return 1;
 			}));

@@ -1,13 +1,12 @@
 package org.cbigames.resourceupdate;
 
-import net.minecraft.text.Text;
-
 import java.io.*;
 import java.net.URL;
 import java.net.URLConnection;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Scanner;
+import net.minecraft.network.chat.Component;
 
 public class Config {
     private String hash;
@@ -53,7 +52,7 @@ public class Config {
         hash = toSHA1(rawPack);
         if(oldHash !=null && ! oldHash.equals(hash)){
             //if changed then announce it to the server
-            ResourcePackUpdates.pm.broadcast(Text.literal("Server Resource pack updated. Relog to apply update"),false);
+            ResourcePackUpdates.pm.broadcastSystemMessage(Component.literal("Server Resource pack updated. Relog to apply update"),false);
         }
     }
 
